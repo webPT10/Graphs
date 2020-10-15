@@ -36,27 +36,37 @@ class Graph:
         Print each vertex in breadth-first order
         beginning from starting_vertex.
         """
-        queue = [] # empty queue, add starting Vertex to it
-        queue.append(starting_vertex)
+        q = Queue() # empty queue, add starting Vertex to it
+        q.enqueue(starting_vertex)
 
         visited = set() # empty set to track visited Vertices
 
-        while len(queue) > 0: # while queue not empty
-            current_vertex = queue.pop() # dequeue a vertex off of queue
+        while q.size() > 0: # while queue not empty
+            v = q.dequeue() # dequeue a vertex off of queue
+            if v not in visited: # if Vertex not in visited Vertices
+                print(v) # print it
+                visited.add(v) # add Vertex to Visited set
 
-            if current_vertex not in visited: # if Vertex not in visited Vertices
-                print(current_vertex) # print it
-                visited.add(current_vertex) # add Vertex to Visited set
-
-                for neighbor in self.get_neighbors(current_vertex):
-                    queue.append(neighbor)
+                for next_vertex in self.get_neighbors(v):
+                    q.enqueue(next_vertex)    
 
     def dft(self, starting_vertex):
         """
         Print each vertex in depth-first order
         beginning from starting_vertex.
         """
-        pass  # TODO
+        # same as above but with a Stack instead of Queue
+        s = Stack()
+        s.push(starting_vertex)
+        visited = set()
+
+        while s.size() > 0:
+            v = s.pop()
+            if v not in visited:
+                print(v)
+                visited.add(v)
+                for next_vertex in self.get_neighbors(v):
+                    s.push(next_vertex)
 
     def dft_recursive(self, starting_vertex):
         """
@@ -65,6 +75,17 @@ class Graph:
 
         This should be done using recursion.
         """
+        # if we instantiate visited as a set (visited = set())
+        # we can take out the next two lines
+        if visited is None:
+            visited = set()
+        
+        if starting_vertex not in visited:
+            visited.add(starting_vertex)
+            print(starting_vertex)
+
+            for next_vertex in self.get_neighbors(starting_vertex):
+                self.dft_recursive(next_vertex, visited)
         pass  # TODO
 
     def bfs(self, starting_vertex, destination_vertex):
