@@ -86,7 +86,7 @@ class Graph:
 
             for next_vertex in self.get_neighbors(starting_vertex):
                 self.dft_recursive(next_vertex, visited)
-        pass  # TODO
+        
 
     def bfs(self, starting_vertex, destination_vertex):
         """
@@ -94,7 +94,24 @@ class Graph:
         starting_vertex to destination_vertex in
         breath-first order.
         """
-        pass  # TODO
+        q = Queue() # push start of path into Queue
+        q.enqueue([starting_vertex])
+        
+        while q.size() > 0: # get first path from Queue
+            path = q.dequeue() 
+            last_vert = path[-1] # get last Vertex from Path
+
+            if last_vert == destination_vertex: # path found
+                return path
+                
+             # enumerate all adjacent nodes, build a new path, and push into Q
+            for adjacent in self.get_neighbors(last_vert):
+                new_path = list(path)
+                new_path.append(adjacent)
+                q.enqueue(new_path)
+            
+
+
 
     def dfs(self, starting_vertex, destination_vertex):
         """
