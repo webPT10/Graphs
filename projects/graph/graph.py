@@ -103,7 +103,7 @@ class Graph:
 
             if last_vert == destination_vertex: # path found
                 return path
-                
+
              # enumerate all adjacent nodes, build a new path, and push into Q
             for adjacent in self.get_neighbors(last_vert):
                 new_path = list(path)
@@ -111,15 +111,28 @@ class Graph:
                 q.enqueue(new_path)
             
 
-
-
     def dfs(self, starting_vertex, destination_vertex):
         """
         Return a list containing a path from
         starting_vertex to destination_vertex in
         depth-first order.
         """
-        pass  # TODO
+        path = []
+        s = Stack()
+        s.push(starting_vertex)
+
+        visited = set()
+
+        while s.size() > 0:
+            v = s.pop()
+            if v not in visited:
+                visited.add(v)
+                path.append(v)
+                if v == destination_vertex:
+                    return path
+
+                for next_vert in self.get_neighbors(v):
+                    s.push(next_vert)
 
     def dfs_recursive(self, starting_vertex, destination_vertex):
         """
