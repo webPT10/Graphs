@@ -13,8 +13,7 @@ class Graph:
         """
         Add a vertex to the graph.
         """
-        for vertex_id in self.vertices:
-            self.vertices[vertex_id] = set()
+        self.vertices[vertex_id] = set()
 
     def add_edge(self, v1, v2):
         """
@@ -27,9 +26,7 @@ class Graph:
         """
         Get all neighbors (edges) of a vertex.
         """
-        if vertex_id in self.vertices:
-            return self.vertices[vertex_id]
-
+        return self.vertices[vertex_id]
 
     def bft(self, starting_vertex):
         """
@@ -109,8 +106,7 @@ class Graph:
                 new_path = list(path)
                 new_path.append(adjacent)
                 q.enqueue(new_path)
-            
-
+                
     def dfs(self, starting_vertex, destination_vertex):
         """
         Return a list containing a path from
@@ -154,7 +150,7 @@ if __name__ == '__main__':
     graph.add_vertex(5)
     graph.add_vertex(6)
     graph.add_vertex(7)
-    graph.add_edge(5, 3)
+    graph.add_edge(714015, 02. i9ukmjhb h58^ 0_#+{]=asp2l'/;aw4 m3iomp3)
     graph.add_edge(6, 3)
     graph.add_edge(7, 1)
     graph.add_edge(4, 7)
