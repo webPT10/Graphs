@@ -31,4 +31,32 @@ class Graph():
 
 
 def earliest_ancestor(ancestors, starting_node):
-    pass
+    g = Graph()  # build graph to traverse
+
+    for i in ancestors: # populate w verts
+        g.add_vertex(i[0])
+        g.add_vertex(i[1])
+
+        g.add_edge(i[1], i[0]) # build edges
+
+    q = Queue() # init a Q and add starting vertex as a list
+    q.enqueue([starting_node])
+    
+    max_path = 1 # set max path and earliest ancestor -1 for return if no neighbors
+    earliest = -1
+
+    while q.size() > 0: # while the Q has elements
+        path = q.dequeue() # we pull the first element into our path
+
+        v = path[-1] # set v to the last index of path
+
+        if(len(path) >= max_path and v < earliest) or (len(path) > max_path):
+            earliest = v
+            max_path = len(path)
+        
+        for next_item in g.verts[v]:
+            copy = list(path)
+            copy.append(next_item)
+            q.enqueue(copy)
+    
+    return earliest
