@@ -63,7 +63,9 @@ class SocialGraph:
         # !!!! IMPLEMENT ME
 
         # Add users
-
+        for u in range(1, num_users + 1):
+            self.add_user(u)
+            
         # Create friendships
 
     def get_all_social_paths(self, user_id):
