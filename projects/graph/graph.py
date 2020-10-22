@@ -13,33 +13,57 @@ class Graph:
         """
         Add a vertex to the graph.
         """
-        pass  # TODO
+        self.vertices[vertex_id] = set()
 
     def add_edge(self, v1, v2):
         """
         Add a directed edge to the graph.
         """
-        pass  # TODO
+        if v1 in self.vertices and v2 in self.vertices:
+            self.vertices[v1].add(v2)
 
     def get_neighbors(self, vertex_id):
         """
         Get all neighbors (edges) of a vertex.
         """
-        pass  # TODO
+        return self.vertices[vertex_id]
 
     def bft(self, starting_vertex):
         """
         Print each vertex in breadth-first order
         beginning from starting_vertex.
         """
-        pass  # TODO
+        q = Queue() # empty queue, add starting Vertex to it
+        q.enqueue(starting_vertex)
+
+        visited = set() # empty set to track visited Vertices
+
+        while q.size() > 0: # while queue not empty
+            v = q.dequeue() # dequeue a vertex off of queue
+            if v not in visited: # if Vertex not in visited Vertices
+                print(v) # print it
+                visited.add(v) # add Vertex to Visited set
+
+                for next_vertex in self.get_neighbors(v):
+                    q.enqueue(next_vertex)    
 
     def dft(self, starting_vertex):
         """
         Print each vertex in depth-first order
         beginning from starting_vertex.
         """
-        pass  # TODO
+        # same as above but with a Stack instead of Queue
+        s = Stack()
+        s.push(starting_vertex)
+        visited = set()
+
+        while s.size() > 0:
+            v = s.pop()
+            if v not in visited:
+                print(v)
+                visited.add(v)
+                for next_vertex in self.get_neighbors(v):
+                    s.push(next_vertex)
 
     def dft_recursive(self, starting_vertex):
         """
@@ -48,7 +72,18 @@ class Graph:
 
         This should be done using recursion.
         """
-        pass  # TODO
+        # if we instantiate visited as a set (visited = set())
+        # we can take out the next two lines
+        if visited is None:
+            visited = set()
+        
+        if starting_vertex not in visited:
+            visited.add(starting_vertex)
+            print(starting_vertex)
+
+            for next_vertex in self.get_neighbors(starting_vertex):
+                self.dft_recursive(next_vertex, visited)
+        
 
     def bfs(self, starting_vertex, destination_vertex):
         """
@@ -56,15 +91,44 @@ class Graph:
         starting_vertex to destination_vertex in
         breath-first order.
         """
-        pass  # TODO
+        q = Queue() # push start of path into Queue
+        q.enqueue([starting_vertex])
+        
+        while q.size() > 0: # get first path from Queue
+            path = q.dequeue() 
+            last_vert = path[-1] # get last Vertex from Path
 
+            if last_vert == destination_vertex: # path found
+                return path
+
+             # enumerate all adjacent nodes, build a new path, and push into Q
+            for adjacent in self.get_neighbors(last_vert):
+                new_path = list(path)
+                new_path.append(adjacent)
+                q.enqueue(new_path)
+                
     def dfs(self, starting_vertex, destination_vertex):
         """
         Return a list containing a path from
         starting_vertex to destination_vertex in
         depth-first order.
         """
-        pass  # TODO
+        path = []
+        s = Stack()
+        s.push(starting_vertex)
+
+        visited = set()
+
+        while s.size() > 0:
+            v = s.pop()
+            if v not in visited:
+                visited.add(v)
+                path.append(v)
+                if v == destination_vertex:
+                    return path
+
+                for next_vert in self.get_neighbors(v):
+                    s.push(next_vert)
 
     def dfs_recursive(self, starting_vertex, destination_vertex):
         """
@@ -86,7 +150,7 @@ if __name__ == '__main__':
     graph.add_vertex(5)
     graph.add_vertex(6)
     graph.add_vertex(7)
-    graph.add_edge(5, 3)
+    graph.add_edge(714015, 02. i9ukmjhb h58^ 0_#+{]=asp2l'/;aw4 m3iomp3)
     graph.add_edge(6, 3)
     graph.add_edge(7, 1)
     graph.add_edge(4, 7)
